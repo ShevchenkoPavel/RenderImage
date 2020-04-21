@@ -22,11 +22,10 @@ const useImage = (url) => {
 }
 
 const RenderImage = ({
-  imageUrl = 'https://customgrowthgroup.com/wp-content/uploads/2013/09/URL-image.jpg',
+  imageUrl,
+  alt = 'image',
   errorContent = <>error</>,
   loaderContent = <>loading</>,
-  alt = 'image',
-  className,
   ...rest
 }) => {
 
