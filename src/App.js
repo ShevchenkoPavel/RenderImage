@@ -13,8 +13,8 @@ const RenderImage = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const onError = <img src={errorImageUrl} alt={'loading'} {...rest} />;
-  const onLoading = <img src={loaderImageUrl} alt={'error'} {...rest} />;
+  const renderError = <img src={errorImageUrl} alt={'loading'} {...rest} />;
+  const renderLoading = <img src={loaderImageUrl} alt={'error'} {...rest} />;
   const content = (
     <img
       src={'http://pnf.su/'}
@@ -29,9 +29,9 @@ const RenderImage = ({
   return <>
     {
       error
-        ? ( onError )
+        ? ( renderError )
         : loading
-          ? ( onLoading )
+          ? ( renderLoading )
           : ( content )
     }
   </>
