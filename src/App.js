@@ -19,7 +19,7 @@ const RenderImage = ({
   const renderLoading = <img src={loaderImageUrl} alt={'loading'} {...rest} />;
   const content = (
     <img
-      src={HUGE_IMG}
+      src={imageUrl}
       className={className}
       alt={placeholder}
       onLoad={() => setLoading(false)}
@@ -31,17 +31,7 @@ const RenderImage = ({
   if (error) return renderError;
   if (loading) return renderLoading;
 
-  return content;  
-  // return <>
-  //   {
-  //     error
-  //       ? ( renderError )
-  //       : loading
-  //         ? ( renderLoading )
-  //         : ( content )
-  //   }
-  // </>
-
+  return content;
 }
 
 export default RenderImage;
