@@ -3,35 +3,43 @@ import './App.css';
 
 const RenderImage = ({
   imageUrl = 'https://customgrowthgroup.com/wp-content/uploads/2013/09/URL-image.jpg',
-  errorImageUrl = '',
-  loaderImageUrl = 'https://pngimg.com/uploads/spinner/spinner_PNG44.png',
+  errorContent = <>error</>,
+  loaderContent = <>loading</>,
   placeholder = 'image',
-  className = "App-logo",
+  className,
   ...rest
 }) => {
 
+  const REGULAR_IMG = 'https://customgrowthgroup.com/wp-content/uploads/2013/09/URL-image.jpg';
   const HUGE_IMG = 'https://i.imgur.com/1RpGWXY.png';
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const renderError = <img src={errorImageUrl} alt={'err'} {...rest} />;
-  const renderLoading = <img src={loaderImageUrl} alt={'loading'} {...rest} />;
+  const img = new Image();
+  img.src = imageUrl;
+  img.onload = () => setLoading(false);
+  img.onerror = () => setError('error');
+
   const content = (
     <img
-      src={imageUrl}
+      src={img.src}
       className={className}
       alt={placeholder}
-      onLoad={() => setLoading(false)}
-      onError={err => setError(err)}
       {...rest}
     />
     );
 
-  if (error) return renderError;
-  if (loading) return renderLoading;
+  if (error) return errorContent;
+  if (loading) return loaderContent;
 
   return content;
+
+//   return error 
+//         ? errorContent
+//         : loading
+//           ? loaderContent
+//           : content;
 }
 
 export default RenderImage;
