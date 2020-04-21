@@ -10,14 +10,16 @@ const RenderImage = ({
   ...rest
 }) => {
 
+  const HUGE_IMG = 'https://i.imgur.com/1RpGWXY.png';
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const renderError = <img src={errorImageUrl} alt={'loading'} {...rest} />;
-  const renderLoading = <img src={loaderImageUrl} alt={'error'} {...rest} />;
+  const renderError = <img src={errorImageUrl} alt={'err'} {...rest} />;
+  const renderLoading = <img src={loaderImageUrl} alt={'loading'} {...rest} />;
   const content = (
     <img
-      src={'http://pnf.su/'}
+      src={HUGE_IMG}
       className={className}
       alt={placeholder}
       onLoad={() => setLoading(false)}
@@ -26,15 +28,20 @@ const RenderImage = ({
     />
     );
 
-  return <>
-    {
-      error
-        ? ( renderError )
-        : loading
-          ? ( renderLoading )
-          : ( content )
-    }
-  </>
+  if (error) return renderError;
+  if (loading) return renderLoading;
+
+  return content;  
+  // return <>
+  //   {
+  //     error
+  //       ? ( renderError )
+  //       : loading
+  //         ? ( renderLoading )
+  //         : ( content )
+  //   }
+  // </>
+
 }
 
 export default RenderImage;
